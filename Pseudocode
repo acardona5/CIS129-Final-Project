@@ -1,0 +1,30 @@
+# 1. Get user input on assignment type
+INPUT assignment_type
+
+# 2. Load appropriate rubric template
+LOAD corresponding_rubric(assignment_type)
+
+# 3. Handle optional custom rubric upload
+IF uploaded_rubric_file:
+    # Use OCR to extract grading criteria and their weights
+    EXTRACT criteria and weights using OCR
+    BUILD custom_rubric()
+
+# 4. Iterate over each grading criterion
+FOR each_criteria IN rubric:
+    DISPLAY criteria_description
+    # Let user self-score OR use AI to generate score
+    GET user_score OR auto_score(criteria, user_input)
+
+# 5. Optional: Enable Live Grade Widget
+IF live_widget_enabled:
+    # Continuously monitor active assignment writing tab
+    MONITOR active_assignment_tab()
+    # Reanalyze the assignment content in real-time
+    CONTINUOUSLY re-analyze text
+    # Update the user's current estimated grade
+    UPDATE estimated_grade_display()
+
+# 6. Final calculation and feedback
+CALCULATE total_score
+DISPLAY estimated_grade_and_feedback
